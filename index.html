@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gera's Island of Joy - East Kharadi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        .amenities-slider {
+            scroll-snap-type: y mandatory;
+        }
+        .amenity-slide {
+            scroll-snap-align: start;
+        }
+        .hero-text-gradient {
+            background: linear-gradient(90deg, #ec4899, #f472b6, #f9a8d4, #ec4899);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGradient 8s ease infinite;
+        }
+        
+        .nav-gradient {
+            background: linear-gradient(90deg, rgba(236,72,153,0.9) 0%, rgba(244,114,182,0.9) 100%);
+        }
+        
+        .scrolled-nav {
+            background-color: rgba(236, 72, 153, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .animation-delay-200 {
+            animation-delay: 200ms;
+        }
+        
+        .animation-delay-400 {
+            animation-delay: 400ms;
+        }
+        
+        .animation-delay-600 {
+            animation-delay: 600ms;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+        }
+        
+        .btn-pink-gradient {
+            background: linear-gradient(90deg, #ec4899 0%, #f472b6 100%);
+        }
+        
+        .btn-pink-gradient:hover {
+            background: linear-gradient(90deg, #db2777 0%, #ec4899 100%);
+        }
+        
+        /* Mobile menu styles */
+        #mobileMenu {
+            width: 50%;
+            left: -50%;
+            transition: all 0.3s ease;
+        }
+        
+        #mobileMenu.show {
+            left: 0;
+        }
+        
+        /* Compact spacing */
+        section {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        /* Fix for video header height */
+        header {
+            height: 100vh;
+            max-height: 100vh;
+        }
+
+        /* Prevent horizontal overflow */
+        .container {
+            max-width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                max-width: 640px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px;
+            }
+        }
+
+        /* Fix for map and image sections */
+        .map-image-container {
+            height: 300px;
+        }
+
+        @media (min-width: 768px) {
+            .map-image-container {
+                height: 400px;
+            }
+        }
+
+        /* Fix for amenities slider height */
+        .amenities-slider {
+            height: 300px;
+        }
+
+        @media (min-width: 768px) {
+            .amenities-slider {
+                height: 400px;
+            }
+        }
+
+        /* Gallery grid fixes */
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .gallery-item {
+            height: 250px;
+        }
+
+        /* Form section fixes */
+        .contact-form-container {
+            min-height: auto;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'slide-left': 'slideLeft 0.8s ease-out',
+                        'slide-right': 'slideRight 0.8s ease-out',
+                        'text-gradient': 'textGradient 8s ease infinite',
+                        'pulse-slow': 'pulse 3s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'bounce-slow': 'bounceSlow 2s infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideLeft: {
+                            '0%': { transform: 'translateX(20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        textGradient: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        bounceSlow: {
+                            '0%, 100%': { 
+                                transform: 'translateY(0)',
+                                'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)'
+                            },
+                            '50%': { 
+                                transform: 'translateY(-25%)',
+                                'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans gradient-bg">
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed w-full z-50 transition-all duration-300 nav-gradient">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-white text-2xl font-bold animate-slide-down">Gera's Island of Joy</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#overview" class="text-white hover:text-pink-200 transition font-medium animate-slide-down animation-delay-200">Overview</a>
+                <a href="#amenities" class="text-white hover:text-pink-200 transition font-medium animate-slide-down animation-delay-300">Amenities</a>
+                <a href="#map" class="text-white hover:text-pink-200 transition font-medium animate-slide-down animation-delay-400">Location</a>
+                <a href="#floor-plans" class="text-white hover:text-pink-200 transition font-medium animate-slide-down animation-delay-600">Floor Plans</a>
+                <a href="#gallery" class="text-white hover:text-pink-200 transition font-medium animate-slide-down animation-delay-700">Gallery</a>
+                <a href="#contact" class="text-white hover:text-pink-200 transition font-medium animate-slide-down animation-delay-800">Contact</a>
+            </div>
+            <button id="mobileMenuButton" class="md:hidden text-white animate-slide-down animation-delay-200">
+                <i class="fas fa-ellipsis-v text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 h-full bg-pink-800 bg-opacity-95 z-40 md:hidden w-1/2">
+        <div class="container mx-auto px-4 py-20 flex flex-col items-start justify-start h-full">
+            <button id="closeMobileMenu" class="absolute top-4 right-4 text-white text-xl">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="#overview" class="text-white text-xl py-3 hover:text-pink-300 transition animate-fade-in w-full border-b border-pink-700">Overview</a>
+            <a href="#amenities" class="text-white text-xl py-3 hover:text-pink-300 transition animate-fade-in animation-delay-100 w-full border-b border-pink-700">Amenities</a>
+            <a href="#map" class="text-white text-xl py-3 hover:text-pink-300 transition animate-fade-in animation-delay-200 w-full border-b border-pink-700">Location</a>
+            <a href="#floor-plans" class="text-white text-xl py-3 hover:text-pink-300 transition animate-fade-in animation-delay-400 w-full border-b border-pink-700">Floor Plans</a>
+            <a href="#gallery" class="text-white text-xl py-3 hover:text-pink-300 transition animate-fade-in animation-delay-500 w-full border-b border-pink-700">Gallery</a>
+            <a href="#contact" class="text-white text-xl py-3 hover:text-pink-300 transition animate-fade-in animation-delay-600 w-full border-b border-pink-700">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section with Video Background -->
+    <header class="relative h-screen overflow-hidden">
+        <video autoplay muted loop playsinline class="absolute w-full h-full object-cover">
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay bg-gradient-to-b from-pink-900/30 to-pink-600/30"></div>
+        
+        <div class="absolute inset-0 flex items-center justify-center text-center px-4 z-10">
+            <div class="text-white max-w-4xl">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in hero-text-gradient">
+                    Gera's Island of Joy
+                </h1>
+                <p class="text-xl md:text-2xl mb-6 animate-fade-in animation-delay-200">
+                    Experience Luxury Living at East Kharadi
+                </p>
+                <div class="animate-slide-up animation-delay-400">
+                    <a href="#contact" class="btn-pink-gradient text-white px-8 py-3 rounded-full text-lg font-semibold transition inline-block shadow-lg hover:shadow-xl">
+                        Enquire Now <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 text-center animate-bounce-slow z-10">
+            <a href="#overview" class="text-white text-2xl"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 animate-fade-in text-pink-800">About The Project</h2>
+            
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div class="md:w-1/2 animate-slide-right">
+                    <p class="text-gray-700 mb-4">
+                        Nestled along the riverbanks & a part of an Integrated Township, Gera's Island of Joy is Pune's most premium ChildCentric® Homes project. 
+                        This integrated township project comprises of 9 towers, offering unmatched excitement of living at East Kharadi.
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        Spread across 12.5 acres of gated development with 33-storey buildings, it features Pune's 1st Go Karting Track & Bowling Alley within Society Premises.
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        The project boasts a 40,000+ sq. ft. Multi-storey Clubhouse and 4 Acres of Open Spaces with 30+ World-Class Amenities.
+                    </p>
+                    <div class="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-600">
+                        <h3 class="text-lg font-semibold mb-2 text-pink-800">Location Highlights:</h3>
+                        <ul class="space-y-1 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-pink-600 mr-2 mt-1">✓</span>
+                                <span>At East Kharadi, part of an 100+ Acre Integrated Township</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-pink-600 mr-2 mt-1">✓</span>
+                                <span>10 mins to Gera Commerzone, WTC & EON IT Park</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-pink-600 mr-2 mt-1">✓</span>
+                                <span>10 mins to Oxford World School, Podar International School & Wellington International School</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-pink-600 mr-2 mt-1">✓</span>
+                                <span>25 mins to Amanora Mall, Seasons Mall & Phoenix Mall Marketcity</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="md:w-1/2 animate-slide-left animation-delay-200">
+                    <div class="relative rounded-xl overflow-hidden shadow-xl hover:scale-105 transition-transform duration-500">
+                        <img src="child.jpg" alt="Project Aerial View" class="w-full h-auto object-cover animate-zoom-in">
+                        <div class="absolute inset-0 bg-gradient-to-t from-pink-900/30 to-pink-500/10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+   <section id="amenities" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in text-pink-800">World-Class Amenities</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Vertical Slider -->
+                <div class="lg:w-1/2 h-96 overflow-y-auto amenities-slider snap-y rounded-lg shadow-xl animate-slide-up">
+                    <div class="amenity-slide h-full">
+                        <img src="child 2.jpg" alt="Go Karting Track" class="w-full h-full object-cover">
+                    </div>
+                    <div class="amenity-slide h-full">
+                        <img src="swimming.jpg" alt="Bowling Alley" class="w-full h-full object-cover">
+                    </div>
+                    <div class="amenity-slide h-full">
+                        <img src="club.jpg" alt="Clubhouse" class="w-full h-full object-cover">
+                    </div>
+                    <div class="amenity-slide h-full">
+                        <img src="tennis.jpg" alt="Tennis Court" class="w-full h-full object-cover">
+                    </div>
+                    <div class="amenity-slide h-full">
+                        <img src="coffee.jpg" alt="Swimming Pool" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <!-- Amenities List -->
+                <div class="lg:w-1/2 animate-slide-up animation-delay-200">
+                    <h3 class="text-xl font-semibold mb-4 text-pink-700">30+ Premium Amenities</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="flex items-start bg-white p-3 rounded-lg shadow hover:shadow-md transition hover:scale-105">
+                            <div class="text-pink-600 mr-2 mt-1"><i class="fas fa-swimming-pool"></i></div>
+                            <div class="font-medium">Swimming Pool</div>
+                        </div>
+                        <div class="flex items-start bg-white p-3 rounded-lg shadow hover:shadow-md transition hover:scale-105">
+                            <div class="text-pink-600 mr-2 mt-1"><i class="fas fa-car"></i></div>
+                            <div class="font-medium">Go Karting Track</div>
+                        </div>
+                        <div class="flex items-start bg-white p-3 rounded-lg shadow hover:shadow-md transition hover:scale-105">
+                            <div class="text-pink-600 mr-2 mt-1"><i class="fas fa-bowling-ball"></i></div>
+                            <div class="font-medium">Bowling Alley</div>
+                        </div>
+                        <div class="flex items-start bg-white p-3 rounded-lg shadow hover:shadow-md transition hover:scale-105">
+                            <div class="text-pink-600 mr-2 mt-1"><i class="fas fa-utensils"></i></div>
+                            <div class="font-medium">Restaurant & Cafe</div>
+                        </div>
+                        <div class="flex items-start bg-white p-3 rounded-lg shadow hover:shadow-md transition hover:scale-105">
+                            <div class="text-pink-600 mr-2 mt-1"><i class="fas fa-dumbbell"></i></div>
+                            <div class="font-medium">Gymnasium</div>
+                        </div>
+                        <div class="flex items-start bg-white p-3 rounded-lg shadow hover:shadow-md transition hover:scale-105">
+                            <div class="text-pink-600 mr-2 mt-1"><i class="fas fa-spa"></i></div>
+                            <div class="font-medium">Spa & Salon</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <a href="#contact" class="inline-block bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-full text-sm font-medium transition shadow-md">
+                            View All Amenities <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 animate-fade-in text-pink-800">Prime Location</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-6 items-center">
+                <!-- Image Section -->
+                <div class="lg:w-1/2 map-image-container rounded-xl overflow-hidden shadow-xl animate-slide-right">
+                    <img 
+                        src="map.jpg" 
+                        alt="Prime Location Overview"
+                        class="w-full h-full object-cover"
+                    >
+                </div>
+                
+                <!-- Map Section -->
+                <div class="lg:w-1/2 map-image-container rounded-xl overflow-hidden shadow-xl animate-slide-left animation-delay-200">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.265588856342!2d73.9334574154165!3d18.562061287384868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c147b8b3a3bf%3A0x6f7fdcc8e4d6c77e!2sPhoenix%20Marketcity%20Pune!5e0!3m2!1sen!2sin!4v1625063229664!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        class="rounded-xl"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Floor Plans Section -->
+    <section id="floor-plans" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 animate-fade-in text-pink-800">Floor Plans</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105 border border-pink-100">
+                    <h3 class="text-lg font-semibold mb-3 text-center text-pink-700">2BHK Prime: 676 sq. ft.</h3>
+                    <img src="2bhk.jpg" alt="2BHK Floor Plan" class="w-full mb-3 rounded-lg">
+                    <div class="text-center font-bold text-pink-600 text-lg">₹80.90L*</div>
+                    <div class="mt-3 text-center">
+                        <button class="bg-pink-100 hover:bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-sm font-medium transition">
+                            View Details <i class="fas fa-expand ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105 border border-pink-100">
+                    <h3 class="text-lg font-semibold mb-3 text-center text-pink-700">2BHK Royal: 827 sq. ft.</h3>
+                    <img src="1bhk.jpg" alt="2BHK Royal Floor Plan" class="w-full mb-3 rounded-lg">
+                    <div class="text-center font-bold text-pink-600 text-lg">₹99.90L*</div>
+                    <div class="mt-3 text-center">
+                        <button class="bg-pink-100 hover:bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-sm font-medium transition">
+                            View Details <i class="fas fa-expand ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition transform hover:scale-105 border border-pink-100">
+                    <h3 class="text-lg font-semibold mb-3 text-center text-pink-700">3BHK Luxury: 1076 sq. ft.</h3>
+                    <img src="3 bhk.jpg" alt="3BHK Floor Plan" class="w-full mb-3 rounded-lg">
+                    <div class="text-center font-bold text-pink-600 text-lg">₹1.29Cr*</div>
+                    <div class="mt-3 text-center">
+                        <button class="bg-pink-100 hover:bg-pink-200 text-pink-700 px-3 py-1 rounded-full text-sm font-medium transition">
+                            View Details <i class="fas fa-expand ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center animate-fade-in">
+                <a href="#contact" class="btn-pink-gradient text-white px-6 py-2 rounded-full text-md font-semibold transition inline-block shadow-lg hover:shadow-xl">
+                    Download All Floor Plans <i class="fas fa-download ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+   <!-- Gallery Section -->
+    <section id="gallery" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in text-pink-800">Project Gallery</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="relative group overflow-hidden rounded-xl shadow-lg animate-slide-up gallery-item">
+                    <img src="gallery 1.jpg" alt="Project Exterior" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-white text-lg font-medium">Project Exterior</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl shadow-lg animate-slide-up animation-delay-100 gallery-item">
+                    <img src="gallery 2.jpg" alt="Lobby Area" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-white text-lg font-medium">Lobby Area</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl shadow-lg animate-slide-up animation-delay-200 gallery-item">
+                    <img src="gallery 3.jpg" alt="Swimming Pool" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-white text-lg font-medium">Swimming Pool</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl shadow-lg animate-slide-up animation-delay-300 gallery-item">
+                    <img src="gallery 4.jpg" alt="Bedroom" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-white text-lg font-medium">Bedroom</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl shadow-lg animate-slide-up animation-delay-400 gallery-item">
+                    <img src="gallery 7.jpg" alt="Living Area" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-white text-lg font-medium">Living Area</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl shadow-lg animate-slide-up animation-delay-500 gallery-item">
+                    <img src="gallery 5.jpg" alt="Kids Play Area" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-white text-lg font-medium">Kids Play Area</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center animate-fade-in">
+                <a href="#" class="inline-block border-2 border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white px-8 py-3 rounded-full text-lg font-semibold transition">
+                    View Full Gallery <i class="fas fa-images ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 animate-fade-in text-pink-800">Get In Touch</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-6 contact-form-container">
+                <div class="lg:w-1/2 animate-slide-right">
+                    <div class="bg-pink-50 p-6 rounded-xl shadow-inner">
+                        <h3 class="text-xl font-semibold mb-4 text-pink-700">Contact Information</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-pink-100 rounded-full p-2 mr-3">
+                                    <i class="fas fa-map-marker-alt text-pink-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-pink-800">Address</h4>
+                                    <p class="text-gray-700 text-sm">Gera's Island of Joy, East Kharadi, Pune, Maharashtra - 411014</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-pink-100 rounded-full p-2 mr-3">
+                                    <i class="fas fa-phone-alt text-pink-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-pink-800">Phone</h4>
+                                    <p class="text-gray-700 text-sm">+91 98765 43210</p>
+                                    <p class="text-gray-700 text-sm">020 1234 5678</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-pink-100 rounded-full p-2 mr-3">
+                                    <i class="fas fa-envelope text-pink-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-pink-800">Email</h4>
+                                    <p class="text-gray-700 text-sm">sales@gerasislandofjoy.com</p>
+                                    <p class="text-gray-700 text-sm">info@gerasislandofjoy.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-medium text-lg mb-3 text-pink-800">Connect With Us</h4>
+                            <div class="flex space-x-3">
+                                <a href="#" class="bg-pink-100 hover:bg-pink-200 text-pink-600 w-8 h-8 rounded-full flex items-center justify-center transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-pink-100 hover:bg-pink-200 text-pink-600 w-8 h-8 rounded-full flex items-center justify-center transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-pink-100 hover:bg-pink-200 text-pink-600 w-8 h-8 rounded-full flex items-center justify-center transition">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="bg-pink-100 hover:bg-pink-200 text-pink-600 w-8 h-8 rounded-full flex items-center justify-center transition">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 animate-slide-left animation-delay-200">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-pink-100">
+                        <h3 class="text-xl font-semibold mb-4 text-pink-700">Enquire Now</h3>
+                        <form id="contactForm">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-1 text-sm">Full Name</label>
+                                    <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 mb-1 text-sm">Email</label>
+                                    <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm" required>
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-gray-700 mb-1 text-sm">Phone</label>
+                                    <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm" required>
+                                </div>
+                                <div>
+                                    <label for="interest" class="block text-gray-700 mb-1 text-sm">Interested In</label>
+                                    <select id="interest" name="interest" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm">
+                                        <option value="2bhk">2BHK (676 sq. ft.)</option>
+                                        <option value="2bhk_royal">2BHK Royal (827 sq. ft.)</option>
+                                        <option value="3bhk">3BHK (1076 sq. ft.)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <label for="message" class="block text-gray-700 mb-1 text-sm">Message</label>
+                                <textarea id="message" name="message" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm"></textarea>
+                            </div>
+                            <div class="mt-4">
+                                <button type="submit" class="btn-pink-gradient text-white px-6 py-2 rounded-full text-md font-semibold transition w-full shadow-lg hover:shadow-xl">
+                                    Submit Enquiry <i class="fas fa-paper-plane ml-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Footer -->
+    <footer class="bg-pink-900 text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-pink-300 text-xs">
+                <p>&copy; 2023 Gera's Island of Joy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle - Updated for left slide
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('show');
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled-nav');
+            } else {
+                nav.classList.remove('scrolled-nav');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu.classList.contains('show')) {
+                        mobileMenu.classList.remove('show');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your enquiry! We will contact you shortly.');
+                this.reset();
+            });
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate-slide-up, .animate-slide-down, .animate-slide-left, .animate-slide-right').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
