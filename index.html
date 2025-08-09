@@ -7,178 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-        }
-        .hero-text-gradient {
-            background: linear-gradient(90deg, #ec4899, #f472b6, #f9a8d4, #ec4899);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: textGradient 8s ease infinite;
-        }
-        
-        .nav-gradient {
-            background: linear-gradient(90deg, rgba(236,72,153,0.9) 0%, rgba(244,114,182,0.9) 100%);
-        }
-        
-        .scrolled-nav {
-            background-color: rgba(236, 72, 153, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
-        }
-        
-        .btn-pink-gradient {
-            background: linear-gradient(90deg, #ec4899 0%, #f472b6 100%);
-        }
-        
-        .btn-pink-gradient:hover {
-            background: linear-gradient(90deg, #db2777 0%, #ec4899 100%);
-        }
-        
-        /* Mobile menu */
-        #mobileMenu {
-            width: 80%;
-            left: -80%;
-            transition: all 0.3s ease;
-        }
-        
-        #mobileMenu.show {
-            left: 0;
-        }
-        
-        /* Compact spacing */
-        section {
-            padding: 2rem 0;
-        }
-
-        /* Header */
-        header {
-            height: 100vh;
-            max-height: 100vh;
-        }
-
-        /* Gallery */
-        .gallery-item {
-            height: 200px;
-        }
-
-        @media (min-width: 768px) {
-            section {
-                padding: 3rem 0;
-            }
-            .gallery-item {
-                height: 250px;
-            }
-            #mobileMenu {
-                width: 50%;
-                left: -50%;
-            }
-        }
-
-        /* Responsive containers */
-        .responsive-container {
-            height: 300px;
-        }
-
-        @media (min-width: 768px) {
-            .responsive-container {
-                height: 350px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes slideLeft {
-            from { transform: translateX(20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes slideRight {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes textGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes bounceSlow {
-            0%, 100% { 
-                transform: translateY(0);
-                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            }
-            50% { 
-                transform: translateY(-25%);
-                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            }
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        .animate-slide-up {
-            animation: slideUp 0.8s ease-out forwards;
-        }
-        
-        .animate-slide-down {
-            animation: slideDown 0.8s ease-out forwards;
-        }
-        
-        .animate-slide-left {
-            animation: slideLeft 0.8s ease-out forwards;
-        }
-        
-        .animate-slide-right {
-            animation: slideRight 0.8s ease-out forwards;
-        }
-        
-        .animate-bounce-slow {
-            animation: bounceSlow 2s infinite;
-        }
-
-        .animation-delay-100 {
-            animation-delay: 100ms;
-        }
-        
-        .animation-delay-200 {
-            animation-delay: 200ms;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="font-sans gradient-bg">
-    <!-- Navigation -->
     <nav id="mainNav" class="fixed w-full z-50 transition-all duration-300 nav-gradient">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
@@ -198,7 +29,6 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
   <div id="mobileMenu" class="fixed top-0 h-full bg-pink-800 bg-opacity-95 z-40 md:hidden">
     <div class="container mx-auto px-4 py-16 flex flex-col items-start justify-start h-full">
         <button id="closeMobileMenu" class="absolute top-4 right-4 text-white text-xl opacity-0">
@@ -213,7 +43,6 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <header class="relative h-screen overflow-hidden">
         <video autoplay muted loop playsinline class="absolute w-full h-full object-cover">
             <source src="video.mp4" type="video/mp4">
@@ -242,7 +71,6 @@
         </div>
     </header>
 
-    <!-- Overview Section -->
     <section id="overview" class="py-8 md:py-12">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-8 text-pink-800">About The Project</h2>
@@ -289,8 +117,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Amenities Section -->
     <section id="amenities" class="py-8 md:py-12 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-8 text-pink-800">World-Class Amenities</h2>
@@ -303,7 +129,6 @@
                     </div>
                 </div>
                 
-                <!-- Amenities List -->
                 <div class="lg:w-1/2">
                     <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-pink-700">30+ Premium Amenities</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -342,18 +167,18 @@
         </div>
     </section>
 
-    <!-- Map Section -->
+  
     <section id="map" class="py-8 md:py-12">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-8 text-pink-800">Prime Location</h2>
             
             <div class="flex flex-col lg:flex-row gap-6">
-                <!-- Image -->
+                
                 <div class="lg:w-1/2 responsive-container rounded-xl overflow-hidden shadow-lg">
                     <img src="map.jpg" alt="Prime Location Overview" class="w-full h-full object-cover">
                 </div>
                 
-                <!-- Map -->
+               
                 <div class="lg:w-1/2 responsive-container rounded-xl overflow-hidden shadow-lg">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.265588856342!2d73.9334574154165!3d18.562061287384868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c147b8b3a3bf%3A0x6f7fdcc8e4d6c77e!2sPhoenix%20Marketcity%20Pune!5e0!3m2!1sen!2sin!4v1625063229664!5m2!1sen!2sin" 
@@ -369,7 +194,6 @@
         </div>
     </section>
     
-    <!-- Floor Plans Section -->
     <section id="floor-plans" class="py-8 md:py-12 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-8 text-pink-800">Floor Plans</h2>
@@ -417,7 +241,6 @@
         </div>
     </section>
 
-   <!-- Gallery Section -->
     <section id="gallery" class="py-8 md:py-12">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-8 text-pink-800">Project Gallery</h2>
@@ -464,8 +287,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
     <section id="contact" class="py-8 md:py-12 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 md:mb-8 text-pink-800">Get In Touch</h2>
@@ -570,7 +391,6 @@
             </div>
         </div>
     </section>
-    <!-- Add this right after the opening <body> tag -->
 <div id="comingSoonPopup" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden">
     <div class="relative bg-white rounded-xl p-8 max-w-md w-full mx-4 border-4" style="border-image: linear-gradient(45deg, #ec4899, #f472b6, #f9a8d4) 1;">
         <button id="closePopup" class="absolute top-4 right-4 text-gray-500 hover:text-pink-600 text-2xl">
@@ -594,39 +414,6 @@
         </div>
     </div>
 </div>
-
-<!-- Add this script right before the closing </body> tag -->
-<script>
-    // Coming Soon Popup
-    document.addEventListener('DOMContentLoaded', function() {
-        const popup = document.getElementById('comingSoonPopup');
-        const closeBtn = document.getElementById('closePopup');
-        const closeBtnAlt = document.getElementById('closePopupBtn');
-        
-        // Show popup after 2 seconds
-        setTimeout(() => {
-            popup.classList.remove('hidden');
-        }, 2000);
-        
-        // Close popup handlers
-        closeBtn.addEventListener('click', () => {
-            popup.classList.add('hidden');
-        });
-        
-        closeBtnAlt.addEventListener('click', () => {
-            popup.classList.add('hidden');
-        });
-        
-        // Close when clicking outside content
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup) {
-                popup.classList.add('hidden');
-            }
-        });
-    });
-</script>
-
-    <!-- Footer -->
     <footer class="bg-pink-900 text-white py-4">
         <div class="container mx-auto px-4">
             <div class="text-center text-pink-300 text-xs">
@@ -635,91 +422,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMobileMenu = document.getElementById('closeMobileMenu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeMobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('show');
-            document.body.style.overflow = '';
-        });
-        
-        // Close menu when clicking outside
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
-                mobileMenu.classList.remove('show');
-                document.body.style.overflow = '';
-            }
-        });
-        
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('mainNav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled-nav');
-            } else {
-                nav.classList.remove('scrolled-nav');
-            }
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (mobileMenu.classList.contains('show')) {
-                        mobileMenu.classList.remove('show');
-                        document.body.style.overflow = '';
-                    }
-                }
-            });
-        });
-        
-        // Form submission
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thank you for your enquiry! We will contact you shortly.');
-                this.reset();
-            });
-        }
-        
-        // Simple animation on scroll
-        const animateOnScroll = function() {
-            const elements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-down, .animate-slide-left, .animate-slide-right');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translate(0, 0)';
-                }
-            });
-        };
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-    </script>
-    
+<script src="script.js"></script>
 </body>
 </html>
