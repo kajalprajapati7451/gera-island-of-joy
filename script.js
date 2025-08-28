@@ -23,85 +23,99 @@
             }
         });
     });
+// Function to open mobile menu
+function openMobileMenu() {
+    mobileMenu.classList.remove('hidden');
+    mobileMenu.classList.add('block');
+    document.body.style.overflow = 'hidden';
+}
 
-      
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMobileMenu = document.getElementById('closeMobileMenu');
+// Function to close mobile menu
+function closeMobileMenuFunc() {
+    mobileMenu.classList.remove('block');
+    mobileMenu.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Event listeners
+mobileMenuButton.addEventListener('click', openMobileMenu);
+closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+
+// Close menu when clicking on links
+const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', closeMobileMenuFunc);
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
         
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        });
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
         
-        closeMobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('show');
-            document.body.style.overflow = '';
-        });
-        
-        
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
-                mobileMenu.classList.remove('show');
-                document.body.style.overflow = '';
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            // Close mobile menu if open
+            if (!mobileMenu.classList.contains('hidden')) {
+                closeMobileMenuFunc();
             }
-        });
-       
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('mainNav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled-nav');
-            } else {
-                nav.classList.remove('scrolled-nav');
-            }
-        });
-        
-      
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                    
-                    if (mobileMenu.classList.contains('show')) {
-                        mobileMenu.classList.remove('show');
-                        document.body.style.overflow = '';
-                    }
-                }
-            });
-        });
-        
-        
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thank you for your enquiry! We will contact you shortly.');
-                this.reset();
+            
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         }
-        
-        
-        const animateOnScroll = function() {
-            const elements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-down, .animate-slide-left, .animate-slide-right');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translate(0, 0)';
-                }
-            });
-        };
+    });
+});
 
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
+// Navbar background change on scroll
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('mainNav');
+    if (window.scrollY > 50) {
+        navbar.classList.add('bg-pink-800');
+        navbar.classList.remove('nav-gradient');
+    } else {
+        navbar.classList.remove('bg-pink-800');
+        navbar.classList.add('nav-gradient');
+    }
+});
+
+// Form submission
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for your enquiry! We will contact you shortly.');
+    this.reset();
+});
+
+// Coming soon popup
+const comingSoonPopup = document.getElementById('comingSoonPopup');
+const closePopupBtn = document.getElementById('closePopupBtn');
+const closePopup = document.getElementById('closePopup');
+
+function showPopup() {
+    comingSoonPopup.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function hidePopup() {
+    comingSoonPopup.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// Show popup after 3 seconds
+setTimeout(showPopup, 3000);
+
+closePopupBtn.addEventListener('click', hidePopup);
+closePopup.addEventListener('click', hidePopup);
+
+// Close popup when clicking outside
+comingSoonPopup.addEventListener('click', function(e) {
+    if (e.target === comingSoonPopup) {
+        hidePopup();
+    }
+});
